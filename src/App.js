@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import {Routes,Route } from "react-router-dom";
+import {Routes,Route} from "react-router-dom";
 import Header from "./components/Header";
 import Homepage from "./pages/Homepage";
 import CoinPage from "./pages/CoinPage";
@@ -25,6 +25,7 @@ const classes = useStyles();
              <Routes>
              <Route path='/' element = {<Homepage/>} exact />
              <Route path='/coins/:id' element = {<CoinPage/>} />
+             <Route path="*" element = {<Homepage/>}/>
              </Routes>
          </div>
          </>
