@@ -12,7 +12,7 @@ import {
   ThemeProvider,
   Typography,
 } from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
+import { makeStyles} from "@material-ui/styles";
 import { Pagination } from "@material-ui/lab";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -50,6 +50,8 @@ const CoinsTable = () => {
       type: "dark",
     },
   });
+
+
   const handleSearch = () => {
     return coins.filter(
       (coin) =>
@@ -137,7 +139,7 @@ const CoinsTable = () => {
                           <img
                             src={row?.image}
                             alt={row.name}
-                            height="50"
+                            height="40"
                             style={{
                               marginBottom: 10,
                             }}
@@ -150,7 +152,7 @@ const CoinsTable = () => {
                             <span
                               style={{
                                 textTransform: "uppercase",
-                                fontSize: 22,
+                                fontSize: "1.5rem",
                               }}
                             >
                               {row.symbol}
@@ -162,7 +164,7 @@ const CoinsTable = () => {
                         </TableCell>
                         <TableCell
                         align="center">
-                        {symbol}{" "}
+                        {symbol}
                         {numberWithCommas(row.current_price.toFixed(2))}
                         </TableCell>
                         <TableCell
@@ -184,11 +186,11 @@ const CoinsTable = () => {
                          {row.price_change_percentage_7d_in_currency.toFixed(2)}%
                         </TableCell>
                         <TableCell align="center">
-                        {symbol}{" "}
+                        {symbol}
                         {numberWithCommas(row.total_volume)}
                         </TableCell>
                         <TableCell align="center">
-                        {symbol}{" "}
+                        {symbol}
                         {numberWithCommas(row.market_cap)}
                         </TableCell>
                       </TableRow>

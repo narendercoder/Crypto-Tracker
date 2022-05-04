@@ -2,10 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { CryptoState } from "../cryptoContext";
 import { SingleCoin } from "../config/api";
-import { LinearProgress, makeStyles, Typography } from "@material-ui/core";
+import { LinearProgress, makeStyles, ThemeProvider, Typography, createTheme, responsiveFontSizes } from "@material-ui/core";
 import CoinInfo from "../components/CoinInfo";
 import ReactHtmlParser from "react-html-parser";
 import { numberWithCommas } from "../components/Banner/carousel";
+
+let theme = createTheme();
+theme = responsiveFontSizes(theme);
 
 const CoinPage = () => {
   const { id } = useParams();
@@ -77,12 +80,14 @@ const CoinPage = () => {
   const classes = useStyles();
   if (!coin) return <LinearProgress style={{ backgroundColor: "gold" }} />;
   return (
+    <ThemeProvider theme={theme}>
     <div className={classes.container}>
       <div className={classes.sidebar}>
         <img
           src={coin?.image.large}
           alt={coin?.name}
-          height="200"
+          max-width="50%"
+          height="auto"
           style={{ marginBottom: 20 }}
         />
         <Typography variant="h3" className={classes.heading}>
@@ -93,12 +98,12 @@ const CoinPage = () => {
         </Typography>
         <div className={classes.marketData}>
           <span style={{ display: "flex" }}>
-            <Typography variant="h5" className={classes.heading}>
+            <Typography variant="h6" className={classes.heading}>
               Rank:
             </Typography>
             &nbsp; &nbsp;
             <Typography
-              variant="h5"
+              variant="h6"
               style={{
                 fontFamily: "Montserrat",
               }}
@@ -107,12 +112,12 @@ const CoinPage = () => {
             </Typography>
           </span>
           <span style={{ display: "flex" }}>
-            <Typography variant="h5" className={classes.heading}>
+            <Typography variant="h6" className={classes.heading}>
               Current Price:
             </Typography>
             &nbsp; &nbsp;
             <Typography
-              variant="h5"
+              variant="h6"
               style={{
                 fontFamily: "Montserrat",
               }}
@@ -124,12 +129,12 @@ const CoinPage = () => {
             </Typography>
           </span>
           <span style={{ display: "flex" }}>
-            <Typography variant="h5" className={classes.heading}>
+            <Typography variant="h6" className={classes.heading}>
               Market Cap:{" "}
             </Typography>
             &nbsp; &nbsp;
             <Typography
-              variant="h5"
+              variant="h6"
               style={{
                 fontFamily: "Montserrat",
               }}
@@ -147,6 +152,7 @@ const CoinPage = () => {
       </div>
       <CoinInfo coin={coin} />
     </div>
+    </ThemeProvider>
   );
 };
 

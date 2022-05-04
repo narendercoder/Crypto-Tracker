@@ -4,11 +4,11 @@ import React from 'react'
 const SelectButtons = ({children, selected, onClick}) => {
     const useStyles = makeStyles({
         selectbuttons:{
+            display: "flex",
+            justifyContent:"center",
             border: "1px solid gold",
             borderRadius: 5,
             padding: 10,
-            paddingLeft: 20,
-            paddingRight: 20,
             fontFamily: "Montserrat",
             cursor: "pointer",
             backgroundColor: selected ? " gold" : "",

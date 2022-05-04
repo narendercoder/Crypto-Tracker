@@ -1,9 +1,13 @@
-import React from 'react'
-import { Container, makeStyles, Typography } from '@material-ui/core';
+import React from 'react';
+import { Container, makeStyles, ThemeProvider, Typography, createTheme, responsiveFontSizes } from '@material-ui/core';
 import Carousel from './carousel';
+
+
 const useStyles = makeStyles(()=>({
     banner:{
-        backgroundImage: "url(./banner2.jpg)"
+        backgroundImage: "url(https://wallpaperaccess.com/full/4578760.jpg)",
+        backgroundSize: "cover",
+        backgroundPosition: "50%"
     },
     bannerContent:{
         height: 400,
@@ -20,11 +24,14 @@ const useStyles = makeStyles(()=>({
       textAlign: "center",
     }
 }))
+let theme = createTheme();
+   theme = responsiveFontSizes(theme);
 
 const Banner = () => {
     const classes = useStyles();
   return (
     <div className={classes.banner}>
+       <ThemeProvider theme={theme}>
         <Container className={classes.bannerContent}>
             <div className={classes.tagline}>
              <Typography 
@@ -48,8 +55,9 @@ const Banner = () => {
             </div>
             <Carousel/>
         </Container>
+        </ThemeProvider>
     </div>
   )
 }
 
-export default Banner
+export default Banner;
