@@ -7,7 +7,6 @@ import {
 import React, { useState, useEffect } from "react";
 import { HistoricalChart } from "../config/api";
 import { CryptoState } from "../cryptoContext";
-import { Chart as ChartJS } from "chart.js/auto";
 import { Line } from "react-chartjs-2";
 import { chartDays } from "../config/data";
 import SelectButtons from "../components/selectButtons";

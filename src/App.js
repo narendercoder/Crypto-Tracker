@@ -4,7 +4,7 @@ import {Routes,Route} from "react-router-dom";
 import Header from "./components/Header";
 import Homepage from "./pages/Homepage";
 import CoinPage from "./pages/CoinPage";
-import {makeStyles} from "@material-ui/core"
+import {makeStyles} from "@material-ui/core";
 
 const App = () => {
 
@@ -21,7 +21,7 @@ const classes = useStyles();
     return (
         <>
          <div className={classes.App}>
-             <Header />
+             <Header/>
              <Routes>
              <Route path='/' element = {<Homepage/>} exact />
              <Route path='/coins/:id' element = {<CoinPage/>} />

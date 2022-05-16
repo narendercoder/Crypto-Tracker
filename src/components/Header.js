@@ -1,7 +1,14 @@
-import React from 'react'
-import {useNavigate} from 'react-router-dom'
+import React from 'react';
+import {useNavigate} from 'react-router-dom';
 import {AppBar, Container, Toolbar, Typography, Select, MenuItem, makeStyles, createTheme, ThemeProvider} from "@material-ui/core"
-import { CryptoState } from '../cryptoContext'
+import { CryptoState } from '../cryptoContext';
+import "../pages/style.css"
+
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+});
 const useStyles = makeStyles(()=>({
   title:{
     flex: 1,
@@ -15,16 +22,9 @@ const Header = () => {
   const classes = useStyles();
   const navigate = useNavigate();
   const {currency, setCurrency} = CryptoState();
-  const darkTheme = createTheme({
-    palette: {
-      primary:{
-        main: "#fff",
-      },
-      type: "dark",
-    },
-  });
+
   return (
-    <ThemeProvider theme={darkTheme}>
+  <ThemeProvider theme={darkTheme}>
    <AppBar color='transparent' position='static'>
    <Container>
      <Toolbar>

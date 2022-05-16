@@ -21,6 +21,14 @@ import { CryptoState } from "../cryptoContext";
 import { numberWithCommas } from "./Banner/carousel";
 
 const CoinsTable = () => {
+  const darkTheme = createTheme({
+    palette: {
+      primary: {
+        main: "#fff",
+      },
+      type: "dark",
+    },
+  });
   const [coins, setCoins] = useState([]);
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
@@ -42,15 +50,6 @@ const CoinsTable = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currency]);
 
-  const darkTheme = createTheme({
-    palette: {
-      primary: {
-        main: "#fff",
-      },
-      type: "dark",
-    },
-  });
-
 
   const handleSearch = () => {
     return coins.filter(
@@ -62,7 +61,7 @@ const CoinsTable = () => {
 
   const useStyles = makeStyles(() => ({
       row: {
-          backgroundColor: "#16171a",
+          backgroundColor: "transparent",
           cursor: "pointer",
           fontFamily: "Montserrat",
           "&:hover": {
