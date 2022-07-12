@@ -5,11 +5,9 @@ import "./index.css";
 import App from "./App";
 import CryptoContext from "./cryptoContext";
 import "react-alice-carousel/lib/alice-carousel.css";
-
-
 ReactDOM.render(
 <CryptoContext>
-<BrowserRouter>
+  <BrowserRouter>
    <App />
    </BrowserRouter>
    </CryptoContext>

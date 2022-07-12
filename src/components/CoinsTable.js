@@ -17,7 +17,7 @@ import { Pagination } from "@material-ui/lab";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CoinList } from "../config/api";
-import { CryptoState } from "../cryptoContext";
+import { UseCryptoState } from "../cryptoContext";
 import { numberWithCommas } from "./Banner/carousel";
 
 const CoinsTable = () => {
@@ -32,7 +32,7 @@ const CoinsTable = () => {
   const [coins, setCoins] = useState([]);
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
-  const { currency, symbol } = CryptoState();
+  const { currency, symbol } = UseCryptoState();
   const Navigate = useNavigate();
   const [page, setPage] = useState(1);
 
@@ -76,7 +76,7 @@ const CoinsTable = () => {
   }));
 
   const classes = useStyles();
-
+ 
   return (
     <div>
       <ThemeProvider theme={darkTheme}>

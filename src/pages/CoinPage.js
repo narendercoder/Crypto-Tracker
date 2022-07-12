@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { CryptoState } from "../cryptoContext";
+import { UseCryptoState } from "../cryptoContext";
 import { SingleCoin } from "../config/api";
 import { LinearProgress, makeStyles, ThemeProvider, Typography, createTheme, responsiveFontSizes } from "@material-ui/core";
-import CoinInfo from "../components/CoinInfo";
 import ReactHtmlParser from "react-html-parser";
 import { numberWithCommas } from "../components/Banner/carousel";
+import {ErrorBoundary} from "react-error-boundary"
+import ErrorFallback from "../components/ErrorBoundary"
+const CoinInfo = React.lazy(()=>import("../components/CoinInfo"));
 
 let theme = createTheme();
 theme = responsiveFontSizes(theme);
@@ -13,13 +15,18 @@ theme = responsiveFontSizes(theme);
 const CoinPage = () => {
   const { id } = useParams();
   const [coin, setCoin] = useState();
-  const { currency, symbol } = CryptoState();
+  const { currency, symbol } = UseCryptoState();
 
   const fetchCoin = async () => {
+    try{
     const url = SingleCoin(id);
     const res = await fetch(url);
     const data = await res.json();
     setCoin(data);
+  }
+    catch (error) {
+      console.log(error);
+    }
   };
   useEffect(() => {
     fetchCoin();
@@ -150,7 +157,11 @@ const CoinPage = () => {
           </span>
         </div>
       </div>
+      <ErrorBoundary FallbackComponent={ErrorFallback} onReset={()=>{}}>
+      <Suspense fallback={<div>Loading..</div>}>
       <CoinInfo coin={coin} />
+      </Suspense>
+      </ErrorBoundary>
     </div>
     </ThemeProvider>
   );

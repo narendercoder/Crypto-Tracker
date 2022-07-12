@@ -1,7 +1,7 @@
 import React from 'react';
 import {useNavigate} from 'react-router-dom';
 import {AppBar, Container, Toolbar, Typography, Select, MenuItem, makeStyles, createTheme, ThemeProvider} from "@material-ui/core"
-import { CryptoState } from '../cryptoContext';
+import { UseCryptoState } from '../cryptoContext';
 import "../pages/style.css"
 
 const darkTheme = createTheme({
@@ -21,7 +21,7 @@ const useStyles = makeStyles(()=>({
 const Header = () => {
   const classes = useStyles();
   const navigate = useNavigate();
-  const {currency, setCurrency} = CryptoState();
+  const {currency, setCurrency} = UseCryptoState();
 
   return (
   <ThemeProvider theme={darkTheme}>

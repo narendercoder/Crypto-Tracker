@@ -6,26 +6,48 @@ import {
 } from "@material-ui/core";
 import React, { useState, useEffect } from "react";
 import { HistoricalChart } from "../config/api";
-import { CryptoState } from "../cryptoContext";
+import { UseCryptoState } from "../cryptoContext";
 import { Line } from "react-chartjs-2";
 import { chartDays } from "../config/data";
 import SelectButtons from "../components/selectButtons";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  } from 'chart.js';
+  
+  ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+  );
 
 const CoinInfo = ({ coin }) => {
   const [historicData, setHistoricData] = useState();
   const [days, setDays] = useState(1);
-  const { currency } = CryptoState();
-  const [flag,setflag] = useState(false);
+  const { currency } = UseCryptoState();
+  const [flag, setflag] = useState(false);
 
   const fetchHistoricData = async () => {
-    const url = HistoricalChart(coin.id, days, currency);
-    const res = await fetch(url);
-    const data = await res.json();
-    setflag(true);
-    setHistoricData(data.prices);
+    try {
+      const url = HistoricalChart(coin.id, days, currency);
+      const res = await fetch(url);
+      const data = await res.json();
+      setflag(true);
+      setHistoricData(data.prices);
+    } catch (error) {
+      console.log(error);
+    }
   };
-
-  console.log("data", historicData);
 
   useEffect(() => {
     fetchHistoricData();
@@ -61,7 +83,7 @@ const CoinInfo = ({ coin }) => {
   return (
     <ThemeProvider theme={darkTheme}>
       <div className={classes.container}>
-        {!historicData | flag===false ? (
+        {!historicData | (flag === false) ? (
           <CircularProgress
             style={{ color: "gold" }}
             size={250}
@@ -88,13 +110,13 @@ const CoinInfo = ({ coin }) => {
                 ],
               }}
               options={{
-                  plugins: {
-                      legend: {
-                          display: false,
-                      }
+                plugins: {
+                  legend: {
+                    display: false,
                   },
+                },
                 elements: {
-                  point: {radius: 1,},
+                  point: { radius: 1 },
                 },
               }}
             />
@@ -109,7 +131,8 @@ const CoinInfo = ({ coin }) => {
               {chartDays.map((day) => (
                 <SelectButtons
                   key={day.value}
-                  onClick={() => {setDays(day.value);
+                  onClick={() => {
+                    setDays(day.value);
                     setflag(false);
                   }}
                   selected={day.value === days}
