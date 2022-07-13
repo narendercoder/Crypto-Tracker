@@ -76,7 +76,7 @@ const CoinsTable = () => {
   }));
 
   const classes = useStyles();
- 
+
   return (
     <div>
       <ThemeProvider theme={darkTheme}>
@@ -93,11 +93,11 @@ const CoinsTable = () => {
             style={{ marginBottom: 20, width: "100%" }}
             onChange={(e) => setSearch(e.target.value)}
           />
-          <TableContainer>
+          <TableContainer >
             {loading ? (
               <LinearProgress style={{ backgroundColor: "gold" }} />
             ) : (
-              <Table>
+              <Table aria-label="simple table">
                 <TableHead style={{ backgroundColor: "#EEBC1D" }}>
                   <TableRow>
                     {["Coin", "Price", "24h %", "7d %","24h Volume","Market Cap"].map(
@@ -109,7 +109,7 @@ const CoinsTable = () => {
                             fontFamily: "Montserrat",
                           }}
                           key={head}
-                          align={head === "Coin" ? "" : "center"}
+                          align={head === "Coin" ? "left" : "center"}
                         >
                           {head}
                         </TableCell>
@@ -199,6 +199,8 @@ const CoinsTable = () => {
               </Table>
             )}
           </TableContainer>
+          {/* Comes from @material-ui/lab */}
+          
           <Pagination 
           style={{
               padding: 20,
@@ -207,7 +209,7 @@ const CoinsTable = () => {
               justifyContent: "center",
           }}
           classes={{ul: classes.pagination}}
-          count={(handleSearch()?.length/10).toFixed(0)}
+          count={(handleSearch()?.length / 10).toFixed(0)}
           onChange={(_, value)=>{
               setPage(value);
               window.scroll(0, 450);
